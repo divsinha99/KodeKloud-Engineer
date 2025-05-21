@@ -1,0 +1,21 @@
+# 	Task
+
+Create one subnet named xfusion-subnet under default VPC.
+
+
+
+#   Solution
+
+Find out the vpc id and cidr range of the default VPC and then check what all subnet ids are existing so as not to conflict with the existing subnets.
+
+```sh
+	aws ec2 describe-vpcs  --> To find out the vpc id and cidr block of the vpc id
+    aws ec2 describe-subnets --> To find out list of all subnets in that vpc
+
+# New subnet to be created which should not conflict with the existing subnet ids:
+	aws ec2 create-subnet \
+    --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=xfusion-subnet}]' \
+	--vpc-id vpc-046bb09d91949f938 \
+    --cidr-block 172.31.128.0/17
+
+```
