@@ -1,0 +1,9 @@
+# 	Task
+
+Create AWS key pair named *nautilus-kp* with type as *rsa*.
+
+#   Solution
+
+```sh
+aws ec2 create-key-pair --key-name nautilus-kp --query 'KeyMaterial' --output text > nautilus-kp.pem
+```
