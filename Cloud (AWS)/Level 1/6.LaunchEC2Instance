@@ -1,0 +1,30 @@
+# Task:
+
+For this task, create an EC2 instance with following requirements:
+
+* The name of the instance must be xfusion-ec2.
+
+* You can use the Amazon Linux AMI to launch this instance.
+
+* The Instance type must be t2.micro.
+
+* Create a new RSA key pair named xfusion-kp.
+
+* Attach the default (available by default) security group.
+
+# Solution:
+
+#Create keypair:
+aws ec2 create-key-pair --key-name xfusion-kp
+
+Go to AMI Catalog, Get the AMI id - 
+AMI ID : ami-05a3e0187917e3e24
+
+#Launch an instance:
+aws ec2 run-instances \
+    --image-id ami-0953476d60561c955 \
+    --count 1 \
+    --instance-type t2.micro \
+    --key-name xfusion-kp \
+    --security-group-ids sg-0621282108c3ee1f1 \
+    --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=xfusion-ec2}]' 

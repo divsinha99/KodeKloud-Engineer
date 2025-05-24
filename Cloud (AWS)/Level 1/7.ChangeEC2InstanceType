@@ -1,0 +1,30 @@
+# Task:
+
+- Change the instance type from t2.micro to t2.nano for nautilus-ec2 instance.
+
+- Make sure the ec2 instance nautilus-ec2 is in running state after the change.
+
+# Solution:
+
+#get the instance id for nautilus-ec2 instance:
+aws ec2 describe-instances
+
+
+# stop the EC2 instance - 
+aws ec2 stop-instances \
+    --instance-ids i-0d663c6e5f6199f72
+
+#wait for the instance to stop:
+aws ec2 wait instance-stopped \
+    --instance-ids i-0d663c6e5f6199f72
+
+# modify the instance type:
+aws ec2 modify-instance-attribute \
+    --instance-id i-0d663c6e5f6199f72 \
+    --instance-type "{\"Value\": \"t2.nano\"}"
+
+#Verify the change:
+aws ec2 describe-instances
+
+# start the instance again:
+aws ec2 start-instances --instance-ids i-0d663c6e5f6199f72  

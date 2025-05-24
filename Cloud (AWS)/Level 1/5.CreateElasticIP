@@ -1,0 +1,9 @@
+# Task:
+
+For this task, allocate an Elastic IP address, name it as datacenter-eip.
+
+# Solution: 
+
+# New elastic ip creation:
+	aws ec2 allocate-address \
+    --tag-specifications 'ResourceType=elastic-ip,Tags=[{Key=Name,Value=datacenter-eip}]' 
